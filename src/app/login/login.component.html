@@ -1,0 +1,57 @@
+<body>
+    <div [@loadCompleted]= 'loadCompleted' class="center">
+        <div [ngClass]="inner">
+            <div id="bg">
+                <h1>Welcome to Shuttler</h1>
+            </div>
+            <div [hidden]="hidden">
+                <h2>Admin Console</h2>
+                <p>This Web Console is for administrators ONLY</p>
+            </div>
+    
+            <div [hidden]="!hidden">
+                <form [formGroup]="profileForm">
+                    <p class="flex-container">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Enter your email</mat-label>
+                            <input matInput placeholder="Placeholder"
+                                formControlName="email">
+                            <mat-icon matSuffix>name</mat-icon>
+                            <mat-hint>This should be a registered email</mat-hint>
+                        </mat-form-field>
+                    </p>
+    
+                    <p class="flex-container">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Enter your password</mat-label>
+                            <input matInput [type]="hide ? 'password' : 'text'"
+    
+                                formControlName="password">
+                            <mat-icon matSuffix>name</mat-icon>
+                            <mat-hint>This should be the registered
+                                corresponding password</mat-hint>
+                        </mat-form-field>
+                    </p>
+                </form>
+                
+            </div>
+    
+            
+            <div class="flex-container">
+                <button mat-raised-button (click)="changeurl()"
+                    [ngClass]="success">{{buttonText}}</button>
+            </div>
+    
+            <div class="alert alert-danger" [hidden]="!show">
+                <!-- <button mat-button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <i class="material-icons">close</i>
+                </button> -->
+                <span>
+                    <b> Error - </b> {{errorMessage}}</span>
+            </div>
+    
+    
+    
+        </div>
+    </div>
+</body>
