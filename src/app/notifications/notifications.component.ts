@@ -1,42 +1,97 @@
+import { Employee } from './../Employee.model';
+import { EmployeesService } from 'app/services/Employees.service';
 import { Component, OnInit } from '@angular/core';
-declare var $: any;
+
+import { Shuttle } from 'app/shuttle.model';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { FormGroup, FormControl } from '@angular/forms';
+import { FirebaseAuthService } from 'app/services/firebase-auth.service';
+import { ToastrService } from 'ngx-toastr';
+
 @Component({
   selector: 'app-notifications',
   templateUrl: './notifications.component.html',
   styleUrls: ['./notifications.component.css']
 })
 export class NotificationsComponent implements OnInit {
+  policies: Employee[] = [];
 
-  constructor() { }
-  showNotification(from, align){
-      const type = ['','info','success','warning','danger'];
-
-      const color = Math.floor((Math.random() * 4) + 1);
-
-      $.notify({
-          icon: "notifications",
-          message: "Welcome to <b>Material Dashboard</b> - a beautiful freebie for every web developer."
-
-      },{
-          type: type[color],
-          timer: 4000,
-          placement: {
-              from: from,
-              align: align
-          },
-          template: '<div data-notify="container" class="col-xl-4 col-lg-4 col-11 col-sm-4 col-md-4 alert alert-{0} alert-with-icon" role="alert">' +
-            '<button mat-button  type="button" aria-hidden="true" class="close mat-button" data-notify="dismiss">  <i class="material-icons">close</i></button>' +
-            '<i class="material-icons" data-notify="icon">notifications</i> ' +
-            '<span data-notify="title">{1}</span> ' +
-            '<span data-notify="message">{2}</span>' +
-            '<div class="progress" data-notify="progressbar">' +
-              '<div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
-            '</div>' +
-            '<a href="{3}" target="{4}" data-notify="url"></a>' +
-          '</div>'
-      });
-  }
+  profileForm = new FormGroup({
+    model: new FormControl(''),
+    seats: new FormControl(''),
+    mileage: new FormControl(''),
+  });
+  hideCalender = false;
+  temp: Employee;
+  constructor(private policyService: EmployeesService,private modalService: NgbModal,public authService: EmployeesService,private toastr: ToastrService) { }
+ 
   ngOnInit() {
+   this.policyService.getEmployees().subscribe(data => {
+      this.policies = data.map(e => {
+        let payload =  {
+          id: e.payload.doc.id,
+          ...e.payload.doc.data()as {}
+        }
+
+       
+
+      
+        
+        return payload as Employee;
+      })
+     
+    })
   }
 
+
+  async delete(p: Employee){
+   this.policyService.deleteEmployees(p).then((result)=>{
+    // console.log('success');
+   }).catch((e)=>{
+    console.log(e.message); 
+   })
+  }
+ 
+  edit(policy){
+this.temp = policy;
+  }
+  async add(content){
+    console.log(this.profileForm.value);
+   
+    if (!this.profileForm.value.mileage || !this.profileForm.value.seats  || !this.profileForm.value.model){
+      this.toastr.error('Empty text field', 'Failed');
+    }else{
+      this.modalService.dismissAll(content)
+      this.toastr.info("Sending.....", 'Sending');
+     this.profileForm.value["lastMaintenance"] = new Date(); 
+      await this.authService.createEmployees(this.profileForm.value).catch(error=>{
+        
+        this.toastr.error(error.message, 'Failed');
+       
+      });
+      this.toastr.success("Sent Successfully", 'SUCCESS');
+      // await this.authService.signIn(this.profileForm.value.email, this.profileForm.value.password).catch(error=>{
+      //   console.log(error.message);
+      //   this.errorMessage = error.message;
+      //   this.show = true;
+      //   setTimeout(() => { this.show = false }, 5000)
+      // })
+     
+
+    }
+  }
+  openVerticallyCentered(content) {
+    this.modalService.open(content, { centered: true });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
 }
+

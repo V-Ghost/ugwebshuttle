@@ -64,7 +64,7 @@ export class LoginComponent implements OnInit, AfterViewInit   {
           this.show = true;
           setTimeout(() => { this.show = false }, 5000)
       }else{
-        console.log("it reach")
+        
         await this.authService.signIn(this.profileForm.value.email, this.profileForm.value.password).catch(error=>{
           console.log(error.message);
           this.errorMessage = error.message;
@@ -72,8 +72,9 @@ export class LoginComponent implements OnInit, AfterViewInit   {
           setTimeout(() => { this.show = false }, 5000)
         })
         if(this.authService.isLoggedIn){
-          console.log("logged in successfully")
+          localStorage.setItem("user","true");
           this.router.navigate([''])
+          console.log("logged in successfully")
         }
 
         // AdminLayoutComponent

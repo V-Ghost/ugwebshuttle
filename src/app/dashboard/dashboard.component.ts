@@ -1,8 +1,10 @@
+import { User } from './../user.model';
 import { Shuttle } from './../shuttle.model';
 import { Component, OnInit } from '@angular/core';
 import * as Chartist from 'chartist';
 import { ShuttleServiceService } from 'app/services/shuttle-service.service';
-
+import { UsersService } from 'app/services/users.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -10,8 +12,11 @@ import { ShuttleServiceService } from 'app/services/shuttle-service.service';
 })
 export class DashboardComponent implements OnInit {
   policies: Shuttle[] = [];
+  usersList: User[] = [];
+  userLength;
   shuttlesLength;
-  constructor(private policyService: ShuttleServiceService) { }
+  constructor(private policyService: ShuttleServiceService, private userService : UsersService,public router: Router) { }
+  
   startAnimationForLineChart(chart){
       let seq: any, delays: any, durations: any;
       seq = 0;
@@ -69,7 +74,12 @@ export class DashboardComponent implements OnInit {
       seq2 = 0;
   };
   ngOnInit() {
-    
+  console.log("taken");
+   
+    if (localStorage.getItem("user") == null) {
+      console.log("no0 there");
+     this.router.navigate(['/login'])
+    } 
       /* ----------==========     Daily Sales Chart initialization For Documentation    ==========---------- */
     
       const dataDailySalesChart: any = {
@@ -154,12 +164,25 @@ export class DashboardComponent implements OnInit {
         this.policies = data.map(e => {
           let payload =  {
             id: e.payload.doc.id,
-            ...e.payload.doc.data()
+            ...e.payload.doc.data()as {} 
           }
           return payload as Shuttle;
         })
-        console.log (this.policies);
-        console.log (this.policies.length);
+        // console.log (this.policies);
+        // console.log (this.policies.length);
+        // this.policies.length = temp;
+      });
+
+      this.userService.getUsers().subscribe(data => {
+        this.usersList = data.map(e => {
+          let payload =  {
+            id: e.payload.doc.id,
+            ...e.payload.doc.data()as {} 
+          }
+          return payload as User;
+        })
+        console.log (this.usersList);
+        console.log (this.usersList.length);
         // this.policies.length = temp;
       });
       // this.policies.length = this.shuttlesLength;

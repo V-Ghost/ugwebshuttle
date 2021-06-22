@@ -13,6 +13,8 @@ export class ShuttleServiceService {
   }
 
   createPolicy(policy: Shuttle) {
+    policy.latitude = "5.6363897209761005";
+    policy.longitude = "-0.18836554383137324";
     return this.firestore.collection('shuttles').add(policy);
   }
 
@@ -21,7 +23,7 @@ export class ShuttleServiceService {
   }
 
   updatePolicy(policy: Shuttle){
-    
+   
     return this.firestore.doc('shuttles/' + policy.id).update(policy);
 }
 }

@@ -29,7 +29,7 @@ export class TypographyComponent implements OnInit {
       this.policies = data.map(e => {
         let payload =  {
           id: e.payload.doc.id,
-          ...e.payload.doc.data()
+          ...e.payload.doc.data()as {}
         }
 
        
@@ -51,10 +51,9 @@ export class TypographyComponent implements OnInit {
    })
   }
   updateDOB(dateObject) {
-    console.log("heeloo")
-    console.log(dateObject.value)
+   
     this.temp.lastMaintenance = dateObject.value
-    console.log(this.temp);
+   
     this.toastr.info("Updating.....", 'Updating');
     this.authService.updatePolicy(this.temp).catch(error=>{
       this.toastr.error(error.message, 'Failed');

@@ -4,8 +4,8 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header card-header-danger">
-                        <h4 class="card-title ">Simple Table</h4>
-                        <p class="card-category"> Here is a subtitle for this table</p>
+                        <h4 class="card-title ">Shuttles</h4>
+                        <p class="card-category"> Below are the registered shuttles</p>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -14,264 +14,123 @@
                                     <th>
                                         ID
                                     </th>
+                                    <!-- <th>
+                                        IndexNumber
+                                    </th> -->
                                     <th>
                                         Name
                                     </th>
-                                    <th>
-                                        Country
+                                    <!-- <th>
+                                        Mileage
                                     </th>
                                     <th>
-                                        City
-                                    </th>
-                                    <th>
-                                        Salary
-                                    </th>
+                                        Last Maintenance
+                                    </th> -->
                                 </thead>
                                 <tbody>
-                                    <tr>
+                                   
+                                  
+                                    <tr  *ngFor="let policy of policies; let i = index">
                                         <td>
-                                            1
+                                            {{policy.id}}
                                         </td>
+                                        <!-- <td>
+                                            {{policy.indexNo}}
+                                        </td> -->
                                         <td>
-                                            Dakota Rice
+                                           {{policy.name}}
                                         </td>
-                                        <td>
-                                            Niger
+                                        <!-- <td>
+                                            {{policy.mileage}}
                                         </td>
-                                        <td>
-                                            Oud-Turnhout
+                                        <td >
+                                            {{policy.lastMaintenance}}
                                         </td>
-                                        <td class="text-primary">
-                                            $36,738
-                                        </td>
+                                        <td class="text-primary" (click)="edit(policy); picker.open()" >
+                                            <a  style="color: grey" > <mat-icon>edit</mat-icon></a>
+                                         </td>
+                                        <td class="text-danger" (click) = 'delete(policy)'>
+                                           <a style="color: red;"> <mat-icon>delete</mat-icon></a>
+                                        </td>  -->
+
+                                       
                                     </tr>
-                                    <tr>
-                                        <td>
-                                            2
-                                        </td>
-                                        <td>
-                                            Minerva Hooper
-                                        </td>
-                                        <td>
-                                            Curaçao
-                                        </td>
-                                        <td>
-                                            Sinaai-Waas
-                                        </td>
-                                        <td class="text-primary">
-                                            $23,789
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            3
-                                        </td>
-                                        <td>
-                                            Sage Rodriguez
-                                        </td>
-                                        <td>
-                                            Netherlands
-                                        </td>
-                                        <td>
-                                            Baileux
-                                        </td>
-                                        <td class="text-primary">
-                                            $56,142
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            4
-                                        </td>
-                                        <td>
-                                            Philip Chaney
-                                        </td>
-                                        <td>
-                                            Korea, South
-                                        </td>
-                                        <td>
-                                            Overland Park
-                                        </td>
-                                        <td class="text-primary">
-                                            $38,735
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            5
-                                        </td>
-                                        <td>
-                                            Doris Greene
-                                        </td>
-                                        <td>
-                                            Malawi
-                                        </td>
-                                        <td>
-                                            Feldkirchen in Kärnten
-                                        </td>
-                                        <td class="text-primary">
-                                            $63,542
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            6
-                                        </td>
-                                        <td>
-                                            Mason Porter
-                                        </td>
-                                        <td>
-                                            Chile
-                                        </td>
-                                        <td>
-                                            Gloucester
-                                        </td>
-                                        <td class="text-primary">
-                                            $78,615
-                                        </td>
-                                    </tr>
+                                    
+                                   
+                                   
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-12">
-                <div class="card card-plain">
-                    <div class="card-header card-header-danger">
-                        <h4 class="card-title mt-0"> Table on Plain Background</h4>
-                        <p class="card-category"> Here is a subtitle for this table</p>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-hover">
-                                <thead class="">
-                                    <th>
-                                        ID
-                                    </th>
-                                    <th>
-                                        Name
-                                    </th>
-                                    <th>
-                                        Country
-                                    </th>
-                                    <th>
-                                        City
-                                    </th>
-                                    <th>
-                                        Salary
-                                    </th>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            1
-                                        </td>
-                                        <td>
-                                            Dakota Rice
-                                        </td>
-                                        <td>
-                                            Niger
-                                        </td>
-                                        <td>
-                                            Oud-Turnhout
-                                        </td>
-                                        <td>
-                                            $36,738
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            2
-                                        </td>
-                                        <td>
-                                            Minerva Hooper
-                                        </td>
-                                        <td>
-                                            Curaçao
-                                        </td>
-                                        <td>
-                                            Sinaai-Waas
-                                        </td>
-                                        <td>
-                                            $23,789
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            3
-                                        </td>
-                                        <td>
-                                            Sage Rodriguez
-                                        </td>
-                                        <td>
-                                            Netherlands
-                                        </td>
-                                        <td>
-                                            Baileux
-                                        </td>
-                                        <td>
-                                            $56,142
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            4
-                                        </td>
-                                        <td>
-                                            Philip Chaney
-                                        </td>
-                                        <td>
-                                            Korea, South
-                                        </td>
-                                        <td>
-                                            Overland Park
-                                        </td>
-                                        <td>
-                                            $38,735
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            5
-                                        </td>
-                                        <td>
-                                            Doris Greene
-                                        </td>
-                                        <td>
-                                            Malawi
-                                        </td>
-                                        <td>
-                                            Feldkirchen in Kärnten
-                                        </td>
-                                        <td>
-                                            $63,542
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            6
-                                        </td>
-                                        <td>
-                                            Mason Porter
-                                        </td>
-                                        <td>
-                                            Chile
-                                        </td>
-                                        <td>
-                                            Gloucester
-                                        </td>
-                                        <td>
-                                            $78,615
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
+           
         </div>
     </div>
+    <!-- <mat-form-field class="example-full-width" [hidden] = 'true'>
+        <input matInput  [matDatepicker]="picker"[hidden] = 'true' (dateChange)="updateDOB($event)">
+        <mat-datepicker-toggle matSuffix [for]="picker" [hidden] = 'true'></mat-datepicker-toggle>
+        <mat-datepicker touchUi #picker></mat-datepicker>
+      </mat-form-field>
+    <ng-template #content let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title">Modal title</h4>
+          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="profileForm">
+                <mat-form-field appearance="outline">
+                    <mat-label>Model Name</mat-label>
+                    <input matInput placeholder="Placeholder" formControlName="model">
+                    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+                  
+                  </mat-form-field>
+               
+             
+                  <mat-form-field appearance="outline">
+                    <mat-label>Number of Seats</mat-label>
+                    <input matInput placeholder="Placeholder" formControlName="seats">
+                    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+                   
+                  </mat-form-field>
+               
+              
+                  <mat-form-field appearance="outline">
+                    <mat-label>Mileage in Kilometres</mat-label>
+                    <input matInput placeholder="Placeholder" formControlName="mileage">
+                    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+                    <mat-hint>Hint</mat-hint>
+                  </mat-form-field>
+            </form>
+               
+              
+       
+     
+      
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-light" (click)="add(content)" style="background-color: blue">Add</button>
+        </div>
+      </ng-template>
+      
+      <ng-template #longContent let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title">Modal title</h4>
+          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+     
+        <div class="modal-footer">
+          <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+        </div>
+      </ng-template>
+      
+      
+    <button mat-fab color="success" aria-label="Example icon button with a home icon" (click) ='openVerticallyCentered(content)' >
+        <mat-icon>add</mat-icon>
+      </button> -->
   </div>
   

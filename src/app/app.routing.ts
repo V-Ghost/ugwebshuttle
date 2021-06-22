@@ -18,6 +18,12 @@ const routes: Routes =[
     redirectTo: 'dashboard',
     pathMatch: 'full',
   },
+
+  {
+    path: 'dashboard',
+    redirectTo: 'dashboard',
+    pathMatch: 'full',
+  },
   {
     path: '',
     component: AdminLayoutComponent,
