@@ -1,25 +1,52 @@
-import { BusStops } from './../bus-stops.model';
+import { async } from '@angular/core/testing';
+import { BusStopService } from './../../services/bus-stop.service';
+import { BusStops } from './../../bus-stops.model';
 import { Component, OnInit } from '@angular/core';
+import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
+import { ActivatedRoute, Router } from '@angular/router'
+import { Observable } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
+import { AngularFirestore } from '@angular/fire/firestore';
+
 
 declare const google: any;
+
 
 interface Marker {
 lat: number;
 lng: number;
 label?: string;
+ 
 draggable?: boolean;
 }
 @Component({
-  selector: 'app-maps',
-  templateUrl: './maps.component.html',
-  styleUrls: ['./maps.component.css']
+  selector: 'app-busstop-select',
+  templateUrl: './busstop-select.component.html',
+  styleUrls: ['./busstop-select.component.css']
 })
-export class MapsComponent implements OnInit {
- 
-  constructor() { }
+export class BusstopSelectComponent implements OnInit {
+    location: Location;
+    state$: Observable<object>;
+    myVar : any;
+    private busStop: BusStops =new BusStops();
+  constructor(private firestore: AngularFirestore,location: Location,public Route: ActivatedRoute,private route: Router,private BusStopService :BusStopService,private toastr: ToastrService ) {
+      this.location = location;
+   }
 
   ngOnInit() {
-
+    
+    // console.log(this.Route.snapshot.paramMap.getAll("name"));
+    this.busStop.name = this.Route.snapshot.paramMap.getAll("name").toString();
+    // this.BusStopService.createBusStop({
+    //     "name": this.busStop.name,
+    // }).catch(error=>{
+        
+    //     this.toastr.error(error.message, 'Failed');
+       
+    //   }).then(()=>{
+    //     this.toastr.success("Sent Successfully", 'SUCCESS');
+    //   });
+    
     var myLatlng = new google.maps.LatLng(5.637255296908295, -0.18530727364529917);
     var mapOptions = {
         zoom: 13,
@@ -112,8 +139,10 @@ export class MapsComponent implements OnInit {
         }]
 
     };
+    
     var map = new google.maps.Map(document.getElementById("map"), mapOptions);
-
+   
+          
     var marker = new google.maps.Marker({
         position: myLatlng,
         title: "Hello World!",
@@ -128,19 +157,42 @@ export class MapsComponent implements OnInit {
     
     
     marker.setMap(map);
-    map.addListener("click", (mapsMouseEvent) => {
+    map.addListener("click",async (mapsMouseEvent) => {
         // Close the current InfoWindow.
         infoWindow.close();
-    
+        console.log( JSON.stringify(mapsMouseEvent.latLng.toJSON(), null, 2
+         ))
+         var temp = JSON.stringify(mapsMouseEvent.latLng.toJSON(), null, 2
+         );
+         console.log();
+        
+        this.firestore.collection('busStops').add({
+        "name": this.busStop.name,
+         "latitude" : mapsMouseEvent.latLng.toJSON()["lat"],
+         "longitude" : mapsMouseEvent.latLng.toJSON()["lng"],
+
+    }).catch(error=>{
+        
+        this.toastr.error(error.message, 'Failed');
+       
+      }).then(docRef=>{
+       
+            this.toastr.success("Sent Successfully", 'SUCCESS');
+            this.location.back();
+      
+      });
+          
+        //this.busStop.latitude = mapsMouseEvent.latLng
         // Create a new InfoWindow.
-        infoWindow = new google.maps.InfoWindow({
-          position: mapsMouseEvent.latLng,
-        });
-        infoWindow.setContent(
-          JSON.stringify(mapsMouseEvent.latLng.toJSON(), null, 2)
-        );
-        infoWindow.open(map);
+        // infoWindow = new google.maps.InfoWindow({
+        //   position: mapsMouseEvent.latLng,
+        // });
+        // infoWindow.setContent(
+        //   JSON.stringify(mapsMouseEvent.latLng.toJSON(), null, 2
+        // );
+        // infoWindow.open(map);
       });
   }
+
 
 }

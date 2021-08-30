@@ -1,3 +1,21 @@
 a{
     cursor: pointer;
 }
+
+.vertical-align {
+   
+    /* margin: 0 auto; */
+    /* border: 5px solid orange; */
+    height: 100%;
+    display: flex;
+    flex-direction: column
+  }
+
+  .horizontal-align {
+   
+    
+    /* border: 5px solid green; */
+    height: 100%;
+    display: flex;
+    flex-direction: row
+  }

@@ -4,8 +4,15 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header card-header-danger">
-                        <h4 class="card-title ">Shuttles</h4>
-                        <p class="card-category"> Below are the registered shuttles</p>
+                    <div class="vertical-align"> 
+                        <h4 class="card-title ">Bus Stops</h4>
+                       
+                        <div class="horizontal-align"> 
+                            <p class="card-category" style="margin-right: auto;"> Below are the registered shuttles</p>
+                        <!-- <div  style="width: 00px;"></div> -->
+                        <i class="material-icons " style="margin-left: auto; font-size:30px; padding-left: 20;  cursor: pointer; " (click) ='openVerticallyCentered(content) '>add</i>
+                        </div>
+                    </div>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -71,10 +78,10 @@
         <input matInput  [matDatepicker]="picker"[hidden] = 'true' (dateChange)="updateDOB($event)">
         <mat-datepicker-toggle matSuffix [for]="picker" [hidden] = 'true'></mat-datepicker-toggle>
         <mat-datepicker touchUi #picker></mat-datepicker>
-      </mat-form-field>
+      </mat-form-field> -->
     <ng-template #content let-modal>
         <div class="modal-header">
-          <h4 class="modal-title">Modal title</h4>
+          <h4 class="modal-title">Register Bus Stop</h4>
           <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -82,27 +89,17 @@
         <div class="modal-body">
             <form [formGroup]="profileForm">
                 <mat-form-field appearance="outline">
-                    <mat-label>Model Name</mat-label>
-                    <input matInput placeholder="Placeholder" formControlName="model">
-                    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+                    <mat-label>Name</mat-label>
+                    <input matInput placeholder="Placeholder" formControlName="name">
+                  
                   
                   </mat-form-field>
                
              
-                  <mat-form-field appearance="outline">
-                    <mat-label>Number of Seats</mat-label>
-                    <input matInput placeholder="Placeholder" formControlName="seats">
-                    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-                   
-                  </mat-form-field>
+                 
                
               
-                  <mat-form-field appearance="outline">
-                    <mat-label>Mileage in Kilometres</mat-label>
-                    <input matInput placeholder="Placeholder" formControlName="mileage">
-                    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-                    <mat-hint>Hint</mat-hint>
-                  </mat-form-field>
+                 
             </form>
                
               
@@ -111,7 +108,10 @@
       
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-light" (click)="add(content)" style="background-color: blue">Add</button>
+              <button  mat-fab color="success" aria-label="Example icon button with a home icon"  (click) ='goToBusstopSelect()' >
+        <mat-icon>location_on</mat-icon>
+      </button> 
+          <!-- <button type="button" class="btn btn-light" (click)="add(content)" style="background-color: blue">Add</button> -->
         </div>
       </ng-template>
       
@@ -129,8 +129,8 @@
       </ng-template>
       
       
-    <button mat-fab color="success" aria-label="Example icon button with a home icon" (click) ='openVerticallyCentered(content)' >
+    <!-- <button mat-fab color="success" aria-label="Example icon button with a home icon" (click) ='openVerticallyCentered(content)' >
         <mat-icon>add</mat-icon>
-      </button> -->
+      </button>  -->
   </div>
   

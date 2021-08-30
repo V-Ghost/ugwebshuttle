@@ -8,6 +8,8 @@ export class Shuttle {
     longitude: string;
     lastMaintenance: any;
     model: string;
+    speed: string;
+   
 
 
    

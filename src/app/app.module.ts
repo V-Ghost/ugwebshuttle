@@ -34,6 +34,8 @@ import { LoginComponent } from './login/login.component';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrModule } from 'ngx-toastr';
+import {MatDialogModule} from '@angular/material/dialog';
+
 
 @NgModule({
   imports: [
@@ -66,6 +68,7 @@ import { ToastrModule } from 'ngx-toastr';
     AngularFireDatabaseModule,
     NgbModule,
     ToastrModule.forRoot(),
+    MatDialogModule,
   ],
   declarations: [
     AppComponent,

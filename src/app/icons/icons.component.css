@@ -1,0 +1,25 @@
+.vertical-align {
+   
+    /* margin: 0 auto; */
+    /* border: 5px solid orange; */
+    height: 100%;
+    display: flex;
+    flex-direction: column
+  }
+
+  .horizontal-align {
+   
+    
+    /* border: 5px solid green; */
+    height: 100%;
+    display: flex;
+    flex-direction: row
+  }
+  /* .item-one {
+    border: 5px solid yellow;
+    margin: auto 0;
+  }
+  .item-two {
+    border: 5px solid red;
+    margin: 0 auto;
+  } */
