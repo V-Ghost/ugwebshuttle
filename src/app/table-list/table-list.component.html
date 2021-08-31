@@ -40,7 +40,7 @@
                                         <td>
                                            {{policy.name}}
                                         </td>
-                                        <!-- <td>
+                                         <!-- <td>
                                             {{policy.mileage}}
                                         </td>
                                         <td >
@@ -48,10 +48,10 @@
                                         </td>
                                         <td class="text-primary" (click)="edit(policy); picker.open()" >
                                             <a  style="color: grey" > <mat-icon>edit</mat-icon></a>
+                                         </td> -->
+                                         <td class="text-danger" (click) = 'delete(policy)'>
+                                            <i style="color: red; cursor: pointer;"> <mat-icon>delete</mat-icon></i>
                                          </td>
-                                        <td class="text-danger" (click) = 'delete(policy)'>
-                                           <a style="color: red;"> <mat-icon>delete</mat-icon></a>
-                                        </td>  -->
 
                                        
                                     </tr>

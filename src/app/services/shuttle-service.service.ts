@@ -16,7 +16,7 @@ export class ShuttleServiceService {
     policy.latitude = "5.6363897209761005";
     policy.longitude = "-0.18836554383137324";
     policy.speed = "0";
-    return this.firestore.collection('shuttles').add(policy);
+    return this.firestore.collection('shuttles').doc(policy.id).set(policy)
   }
 
   deletePolicy(policyId: Shuttle) {

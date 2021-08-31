@@ -18,7 +18,7 @@ export class TypographyComponent implements OnInit {
   profileForm = new FormGroup({
     model: new FormControl(''),
     seats: new FormControl(''),
-    mileage: new FormControl(''),
+    id: new FormControl(''),
   });
   hideCalender = false;
   temp: Shuttle;
@@ -69,7 +69,7 @@ this.temp = policy;
   async add(content){
     console.log(this.profileForm.value);
    
-    if (!this.profileForm.value.mileage || !this.profileForm.value.seats  || !this.profileForm.value.model){
+    if (!this.profileForm.value.id || !this.profileForm.value.seats  || !this.profileForm.value.model){
       this.toastr.error('Empty text field', 'Failed');
     }else{
       this.modalService.dismissAll(content)
